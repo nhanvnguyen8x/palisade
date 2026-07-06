@@ -1,0 +1,1 @@
+Access Control is modeled using ACL entries instead of embedding permissions inside business entities.

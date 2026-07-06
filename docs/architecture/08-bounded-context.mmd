@@ -1,0 +1,55 @@
+flowchart TB
+
+    subgraph IA["Identity & Access"]
+        ORG[Organization]
+        WS[Workspace]
+        USER[User]
+        GROUP[Group]
+        ROLE[Role]
+        MEMBER[Workspace Membership]
+        ACL[Document ACL]
+    end
+
+    subgraph KM["Knowledge Management"]
+        KB[Knowledge Base]
+        KS[Knowledge Source]
+        DOC[Document]
+        CHUNK[Chunk]
+        JOB[Ingestion Job]
+        CONNECTOR[Connector]
+    end
+
+    subgraph CONV["Conversation"]
+        CONVERSATION[Conversation]
+        MESSAGE[Message]
+        CITATION[Citation]
+    end
+
+    subgraph AI["AI Runtime"]
+        RETRIEVE[Retriever]
+        PROMPT[Prompt Builder]
+        EMBED[Embedding]
+        INFERENCE[Inference]
+        STREAM[Streaming]
+    end
+
+    subgraph PLATFORM["Platform"]
+        POSTGRES[(PostgreSQL)]
+        REDIS[(Redis)]
+        MILVUS[(Milvus)]
+        STORAGE[(Object Storage)]
+    end
+
+    IA --> KM
+
+    KM --> AI
+
+    AI --> CONV
+
+    CONV --> POSTGRES
+
+    KM --> STORAGE
+
+    AI --> MILVUS
+
+    AI --> REDIS

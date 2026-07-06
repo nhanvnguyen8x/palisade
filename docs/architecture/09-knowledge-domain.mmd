@@ -1,0 +1,56 @@
+classDiagram
+
+    class Workspace {
+        +UUID id
+        +string name
+    }
+
+    class KnowledgeBase {
+        +UUID id
+        +string name
+    }
+
+    class Connector {
+        +UUID id
+        +ConnectorType type
+    }
+
+    class KnowledgeSource {
+        +UUID id
+        +SourceType type
+        +SourceStatus status
+    }
+
+    class Document {
+        +string filename
+        +string storagePath
+    }
+
+    class Chunk {
+        +UUID id
+        +int chunkIndex
+    }
+
+    class Embedding {
+        +UUID id
+        +string vectorId
+    }
+
+    class IngestionJob {
+        +UUID id
+        +JobStatus status
+    }
+
+    Workspace "1" --> "*" KnowledgeBase
+
+    KnowledgeBase "1" --> "*" Connector
+
+    KnowledgeBase "1" --> "*" KnowledgeSource
+
+    KnowledgeSource <|-- Document
+
+    KnowledgeSource "1" --> "*" Chunk
+
+    Chunk "1" --> "1" Embedding
+
+    KnowledgeSource "1" --> "*" IngestionJob

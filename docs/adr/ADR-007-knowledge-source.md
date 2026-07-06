@@ -1,0 +1,1 @@
+AI Runtime indexes Knowledge Sources, not Documents.

@@ -1,0 +1,45 @@
+sequenceDiagram
+
+    actor User
+
+    participant UI
+
+    participant GoAPI
+
+    participant AIRuntime
+
+    participant Milvus
+
+    participant LLM
+
+    participant DB
+
+    User->>UI: Ask Question
+
+    UI->>GoAPI: POST /conversations/{id}/messages
+
+    GoAPI->>DB: Save User Message
+
+    GoAPI->>AIRuntime: Inference Request
+
+    AIRuntime->>Milvus: Retrieve Chunks
+
+    Milvus-->>AIRuntime: Top K Chunks
+
+    AIRuntime->>AIRuntime: Build Prompt
+
+    AIRuntime->>LLM: Generate
+
+    loop Streaming
+
+        LLM-->>AIRuntime: Token
+
+        AIRuntime-->>GoAPI: Token
+
+        GoAPI-->>UI: SSE
+
+    end
+
+    AIRuntime->>DB: Save Assistant Message
+
+    AIRuntime->>DB: Save Citations

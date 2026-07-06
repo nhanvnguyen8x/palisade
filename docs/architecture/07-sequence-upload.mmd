@@ -1,0 +1,55 @@
+sequenceDiagram
+
+    actor User
+
+    participant UI
+
+    participant GoAPI
+
+    participant Storage
+
+    participant DB
+
+    participant AIRuntime
+
+    participant Milvus
+
+    User->>UI: Upload PDF
+
+    UI->>GoAPI: POST /knowledge-sources
+
+    GoAPI->>GoAPI: Validate JWT
+
+    GoAPI->>GoAPI: Check ACL
+
+    GoAPI->>Storage: Upload File
+
+    Storage-->>GoAPI: Object Key
+
+    GoAPI->>DB: Create Knowledge Source
+
+    GoAPI->>DB: Create Ingestion Job
+
+    GoAPI-->>UI: 202 Accepted
+
+    loop Polling
+
+        AIRuntime->>DB: Fetch Pending Job
+
+        DB-->>AIRuntime: Job
+
+        AIRuntime->>Storage: Download PDF
+
+        AIRuntime->>AIRuntime: Parse
+
+        AIRuntime->>AIRuntime: Chunk
+
+        AIRuntime->>AIRuntime: Embedding
+
+        AIRuntime->>Milvus: Store Vector
+
+        AIRuntime->>DB: Update Job
+
+        AIRuntime->>DB: Update Knowledge Source
+
+    end
