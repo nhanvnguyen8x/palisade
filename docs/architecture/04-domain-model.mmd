@@ -1,0 +1,111 @@
+classDiagram
+
+class Organization {
+    +UUID id
+    +string name
+}
+
+class Workspace {
+    +UUID id
+    +string name
+}
+
+class User {
+    +UUID id
+    +string email
+}
+
+class WorkspaceMember {
+    +UUID workspaceId
+    +UUID userId
+    +UUID roleId
+}
+
+class Role {
+    +UUID id
+    +string name
+}
+
+class Document {
+    +UUID id
+    +string title
+    +DocumentStatus status
+}
+
+class DocumentACL {
+    +UUID documentId
+    +PrincipalType principalType
+    +UUID principalId
+    +Permission permission
+}
+
+class Chunk {
+    +UUID id
+    +int chunkIndex
+}
+
+class Conversation {
+    +UUID id
+    +string title
+}
+
+class Message {
+    +UUID id
+    +MessageRole role
+}
+
+class Citation {
+    +UUID id
+}
+
+class Prompt {
+    +UUID id
+    +int version
+}
+
+class Model {
+    +UUID id
+    +string modelName
+}
+
+class Provider {
+    +UUID id
+    +string type
+}
+
+class Job {
+    +UUID id
+    +JobStatus status
+}
+
+Organization "1" --> "*" Workspace
+
+Organization "1" --> "*" User
+
+Workspace "1" --> "*" WorkspaceMember
+
+User "1" --> "*" WorkspaceMember
+
+Role "1" --> "*" WorkspaceMember
+
+Workspace "1" --> "*" Document
+
+Document "1" --> "*" Chunk
+
+Document "1" --> "*" DocumentACL
+
+Workspace "1" --> "*" Conversation
+
+Conversation "1" --> "*" Message
+
+Message "1" --> "*" Citation
+
+Document "1" --> "*" Citation
+
+Workspace "1" --> "*" Prompt
+
+Workspace "1" --> "*" Model
+
+Provider "1" --> "*" Model
+
+Document "1" --> "*" Job
