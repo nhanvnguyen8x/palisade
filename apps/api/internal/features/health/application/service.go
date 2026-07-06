@@ -3,7 +3,7 @@ package application
 import (
 	"context"
 
-	"github.com/nhanvnguyen8x/palisade/internal/platform/health/domain"
+	"github.com/nhanvnguyen8x/palisade/internal/features/health/domain"
 )
 
 type Service struct {

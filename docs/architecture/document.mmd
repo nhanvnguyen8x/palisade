@@ -1,0 +1,14 @@
+stateDiagram-v2
+    [*] --> Uploaded
+
+    Uploaded --> Processing
+
+    Processing --> Ready
+
+    Processing --> Failed
+
+    Failed --> Processing : Retry
+
+    Ready --> Archived
+
+    Archived --> [*]

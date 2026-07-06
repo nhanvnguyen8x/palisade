@@ -2,7 +2,7 @@ package transport
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/nhanvnguyen8x/palisade/internal/platform/health/application"
+	"github.com/nhanvnguyen8x/palisade/internal/features/health/application"
 	"github.com/nhanvnguyen8x/palisade/internal/shared/rest"
 )
 

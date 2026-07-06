@@ -1,0 +1,16 @@
+sequenceDiagram
+    participant User
+    participant API
+    participant Storage
+    participant Worker
+
+    User->>API: Upload PDF
+    API->>Storage: Save Blob
+    API->>API: Create Document
+    API-->>User: 202 Accepted
+
+    Worker->>Storage: Read Blob
+    Worker->>Worker: Parse
+    Worker->>Worker: Chunk
+    Worker->>Worker: Embedding
+    Worker->>Worker: Save Knowledge
