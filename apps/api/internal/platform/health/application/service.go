@@ -14,5 +14,7 @@ func NewService() *Service {
 }
 
 func (s *Service) GetHealth(ctx context.Context) (*domain.HealthReport, error) {
-	return &domain.HealthReport{}, nil
+	return &domain.HealthReport{
+		Status: domain.StatusUp,
+	}, nil
 }
