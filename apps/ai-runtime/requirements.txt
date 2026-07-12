@@ -1,0 +1,9 @@
+requests
+psycopg[binary]
+minio
+pypdf
+numpy
+
+# Optional Milvus support (worker sẽ chạy được nếu không cài)
+pymilvus
+

@@ -16,6 +16,14 @@ func main() {
 	if err := cfg.Validate(); err != nil {
 		log.Fatal(err)
 	}
-	app := bootstrap.NewApplication(cfg)
-	app.Run()
+
+	app, err := bootstrap.NewApplication(cfg)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer app.Close()
+
+	if err := app.Run(); err != nil {
+		log.Fatal(err)
+	}
 }
